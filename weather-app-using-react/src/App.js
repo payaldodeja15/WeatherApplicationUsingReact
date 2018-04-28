@@ -55,9 +55,16 @@ else{
   render(){
     return(
       <div>
-
-       <Titles/>
-       <Form getWeather={this.getWeather}/>
+       <div className="wrapper">
+         <div className="main">
+           <div className="container">
+             <div className="row">
+             
+             <div className=".col-xs-5 title-container">
+             <Titles/>
+               </div>
+               <div className=".col-xs-7 form-container">
+               <Form getWeather={this.getWeather}/>
        <Weather 
        temperature={this.state.temperature}
        city={this.state.city}
@@ -66,6 +73,13 @@ else{
        humidity={this.state.humidity}
        error={this.state.error}
        />
+
+
+</div>
+             </div>
+             </div>
+             </div>
+             </div>
 
       </div>
     );
