@@ -7,11 +7,34 @@ const API_KEY = "c79fcadc61f299e6ca078c0709a87519";
 //initializing a component
 class App extends React.Component{
 
+//state is an object that contains jkey value pairs
+  state={
+    temperature: undefined,
+    city:undefined,
+    country:undefined,
+    humidity:undefined,
+    description:undefined,
+    error:undefined
+
+
+
+  }
  getWeather = async(e)=>{
    e.preventDefault();
-const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=Manchester,uk&appid=${API_KEY}&units=metric`);
+   const city=e.target.elements.city.value;
+   const country=e.target.elements.country.value;
+const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}&units=metric`);
 const data=await api_call.json();
 console.log(data);
+
+this.setState({
+  temperature:data.main.temp,
+  city:data.name,
+  country:data.sys.country,
+  humidity:data.main.humidity,
+  description:data.weather[0].description,
+  error:""
+});
  }
   render(){
     return(
@@ -19,7 +42,14 @@ console.log(data);
 
        <Titles/>
        <Form getWeather={this.getWeather}/>
-       <Weather/>
+       <Weather 
+       temperature={this.state.temperature}
+       city={this.state.city}
+       country={this.state.country}
+       description={this.state.description}
+       humidity={this.state.humidity}
+       error={this.state.error}
+       />
 
       </div>
     );

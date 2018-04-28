@@ -5,9 +5,13 @@ class Weather extends React.Component{
     {
         return(
 
-            <div>Weather Component </div>
+            <div>
+                
+                {this.props.temperature}
+                
+                 </div>
         );
     }
-}
+};
 
 export default Weather;
